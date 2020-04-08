@@ -3,7 +3,7 @@ Dataloop FaaS example for a function that extracts image exif information and up
 
 This function is ready to use. There are two ways to push and deploy it to Dataloop Platform:
 
-###1. CLI
+##1. CLI
 
 cd (this directory)
 
@@ -13,7 +13,7 @@ dlp packages push --checkout
 
 dlp packages deploy --checkout
 
-###2. SDK
+##2. SDK
 
 Run the script in create_function_script.py
 
