@@ -1,22 +1,77 @@
 # image-metadata-extractor
+
 Dataloop FaaS example for a function that extracts image exif information and uploads it to item's metadata.
 
-This function is ready to use. There are two ways to push and deploy it to Dataloop Platform:
+## SDK Installation
 
-##1. CLI
+You need to have dtlpy installed, if don't already, install it by running:
 
-cd (this directory)
+```bash
+pip install dtlpy --upgrade
+```
 
-dlp projects checkout --project-name (name of the project)
+## Usage
+
+### CLI
+
+```bash
+cd <this directory>
+
+dlp projects checkout --project-name <name of the project>
 
 dlp packages push --checkout
 
 dlp packages deploy --checkout
+```
+### SDK
 
-##2. SDK
+```python
+import dtlpy as dl
 
-Run the script in create_function_script.py
+#######################################
+# define package name and get project #
+#######################################
+package_name = 'image-metadata-extractor'
+project = dl.projects.get(project_name='MyProject')
 
-##Requirements
-You need to have dtlpy installed, if don't already, install it by running:
-pip install dtlpy --upgrade
+################
+# push package #
+################
+
+# create module
+module = dl.PackageModule(
+    functions=dl.PackageFunction(
+        inputs=dl.FunctionIO(
+            type=dl.PackageInputType.ITEM, name='item')))
+
+# push package
+package = project.packages.push(package_name=package_name,
+                                modules=module,
+                                src_path='/image-metadata-extractor')
+
+##################
+# deploy service #
+##################
+service = package.services.deploy(service_name=package_name,
+                                  runtime={'gpu': False,
+                                           'numReplicas': 1,
+                                           'concurrency': 100})
+
+##################
+# create trigger #
+##################
+filters = {'metadata': {'system': {'mimetype': 'image/*'}}}
+trigger = service.triggers.create(name=package_name,
+                                  filters=filters,
+                                  actions=['Created'],
+                                  execution_mode='Once',
+                                  resource='Item')
+```
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
