@@ -1,0 +1,30 @@
+{
+  "name": "image-metadata-extractor",
+  "packageName": "image-metadata-extractor",
+  "moduleName": "default_module",
+  "runtime": {
+    "gpu": false,
+    "replicas": 1,
+    "concurrency": 100
+  },
+  "triggers": [
+    {
+      "name": "image-metadata-extractor",
+      "filter": {
+        "metadata": {
+          "system": {
+            "mimetype": {
+              "$eq": "image/*"
+            }
+          }
+        }
+      },
+      "resource": "Item",
+      "actions": [
+        "Created"
+      ],
+      "executionMode": "Once"
+    }
+  ],
+  "initParams": {}
+}

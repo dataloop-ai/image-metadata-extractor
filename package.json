@@ -1,0 +1,23 @@
+{
+    "name": "image-metadata-extractor",
+    "modules": [
+    {
+      "name": "default_module",
+      "entryPoint": "main.py",
+      "initInputs": [],
+      "functions": [
+        {
+          "name": "run",
+          "description": "Get image exif",
+          "input": [
+            {
+              "name": "item",
+              "type": "Item"
+            }
+          ],
+          "output": []
+        }
+      ]
+    }
+  ]
+}
