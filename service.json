@@ -1,6 +1,6 @@
 {
-  "name": "image-metadata-extractor",
-  "packageName": "image-metadata-extractor",
+  "name": "image-exif",
+  "packageName": "image-exif",
   "moduleName": "default_module",
   "runtime": {
     "gpu": false,
@@ -9,7 +9,7 @@
   },
   "triggers": [
     {
-      "name": "image-metadata-extractor",
+      "name": "image-exif",
       "filter": {
         "metadata": {
           "system": {

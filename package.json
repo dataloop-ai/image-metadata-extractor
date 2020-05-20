@@ -1,5 +1,5 @@
 {
-    "name": "image-metadata-extractor",
+    "name": "image-exif",
     "modules": [
     {
       "name": "default_module",
