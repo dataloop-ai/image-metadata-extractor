@@ -40,13 +40,21 @@ project = dl.projects.get(project_name='MyProject')
 
 # create module
 module = dl.PackageModule(
-    functions=dl.PackageFunction(
-        inputs=dl.FunctionIO(
-            type=dl.PackageInputType.ITEM, name='item')))
+    functions=[
+        dl.PackageFunction(
+            inputs=[
+                dl.FunctionIO(
+                    type=dl.PackageInputType.ITEM,
+                    name='item'
+                )
+            ]
+        )
+    ]
+)
 
 # push package
 package = project.packages.push(package_name=package_name,
-                                modules=module,
+                                modules=[module],
                                 src_path='/image-metadata-extractor')
 
 ##################
